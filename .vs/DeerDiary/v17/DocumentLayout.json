@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Nicola Truscello\\Documents\\Russell-Yunes-Nicola-ipt8-2024\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{983FB2B9-091B-4CFF-AF17-7C8FE54DB87C}|frontend\\DeerDiary_Frontend\\DeerDiary_Frontend\\DeerDiary_Frontend.csproj|c:\\users\\nicola truscello\\documents\\russell-yunes-nicola-ipt8-2024\\frontend\\deerdiary_frontend\\deerdiary_frontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{983FB2B9-091B-4CFF-AF17-7C8FE54DB87C}|frontend\\DeerDiary_Frontend\\DeerDiary_Frontend\\DeerDiary_Frontend.csproj|solutionrelative:frontend\\deerdiary_frontend\\deerdiary_frontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2C49558-6616-4FBB-A689-1C25C3A2B56F}|frontend\\DeerDiary_Frontend\\DeerDiary_Frontend.Client\\DeerDiary_Frontend.Client.csproj|c:\\users\\nicola truscello\\documents\\russell-yunes-nicola-ipt8-2024\\frontend\\deerdiary_frontend\\deerdiary_frontend.client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2C49558-6616-4FBB-A689-1C25C3A2B56F}|frontend\\DeerDiary_Frontend\\DeerDiary_Frontend.Client\\DeerDiary_Frontend.Client.csproj|solutionrelative:frontend\\deerdiary_frontend\\deerdiary_frontend.client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Nicola Truscello\\Documents\\Russell-Yunes-Nicola-ipt8-2024\\frontend\\DeerDiary_Frontend\\DeerDiary_Frontend\\Program.cs",
+              "RelativeDocumentMoniker": "frontend\\DeerDiary_Frontend\\DeerDiary_Frontend\\Program.cs",
+              "ToolTip": "C:\\Users\\Nicola Truscello\\Documents\\Russell-Yunes-Nicola-ipt8-2024\\frontend\\DeerDiary_Frontend\\DeerDiary_Frontend\\Program.cs",
+              "RelativeToolTip": "frontend\\DeerDiary_Frontend\\DeerDiary_Frontend\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-29T13:37:37.394Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Nicola Truscello\\Documents\\Russell-Yunes-Nicola-ipt8-2024\\frontend\\DeerDiary_Frontend\\DeerDiary_Frontend.Client\\Program.cs",
+              "RelativeDocumentMoniker": "frontend\\DeerDiary_Frontend\\DeerDiary_Frontend.Client\\Program.cs",
+              "ToolTip": "C:\\Users\\Nicola Truscello\\Documents\\Russell-Yunes-Nicola-ipt8-2024\\frontend\\DeerDiary_Frontend\\DeerDiary_Frontend.Client\\Program.cs",
+              "RelativeToolTip": "frontend\\DeerDiary_Frontend\\DeerDiary_Frontend.Client\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-29T13:37:34.8Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

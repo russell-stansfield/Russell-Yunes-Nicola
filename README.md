@@ -1,4 +1,4 @@
-# DeerMyVoice
+# DeerDiary
 
 ## Concept and Planning
 

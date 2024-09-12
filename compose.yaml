@@ -1,0 +1,34 @@
+services:
+ db:
+   image: mysql:latest
+   container_name: mysql-db
+   environment:
+     MYSQL_ROOT_PASSWORD: examplepassword  
+     MYSQL_DATABASE: exampledb
+     MYSQL_USER: exampleuser
+     MYSQL_PASSWORD: exampleuserpassword
+   ports:
+     - "3306:3306"
+   volumes:
+     - db_data:/var/lib/mysql
+   networks:
+     - mynet
+
+ phpmyadmin:
+   image: phpmyadmin/phpmyadmin:latest
+   container_name: phpmyadmin
+   environment:
+    MYSQL_ROOT_PASSWORD: examplepassword  
+    MYSQL_DATABASE: exampledb
+   ports:
+     - "8080:80"
+   depends_on:
+     - db
+   networks:
+     - mynet
+
+volumes:
+ db_data:
+
+networks:
+ mynet:

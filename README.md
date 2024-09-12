@@ -11,4 +11,4 @@ We will employ Blazor as our frontend, where it is independent from the backend 
 #### Backend
 We will employ ASP.NET as our backend, where it connects to the DB and offers an API. Entity framework will be used as an ORM.
 #### Database
-We will employ SQLite as our Database.
+We will employ a MySQL database which will be running inside a container.

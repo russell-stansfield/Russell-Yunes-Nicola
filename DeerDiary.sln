@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeerDiary_Frontend", "front
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeerDiary_Frontend.Client", "frontend\DeerDiary_Frontend\DeerDiary_Frontend.Client\DeerDiary_Frontend.Client.csproj", "{F2C49558-6616-4FBB-A689-1C25C3A2B56F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeerDiary_Backend", "backend\DeerDiary_Backend\DeerDiary_Backend.csproj", "{F7E25137-363B-4055-A816-4871FD81D938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeerDiary_Backend", "backend\DeerDiary_Backend\DeerDiary_Backend.csproj", "{F7E25137-363B-4055-A816-4871FD81D938}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

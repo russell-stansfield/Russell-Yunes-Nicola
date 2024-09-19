@@ -28,5 +28,12 @@ namespace DeerDiary_Backend.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [Route("api/message")]
+        // Test
+        public ContentResult message()
+        {
+            return Content("message", "text/plain");
+        }
     }
 }

@@ -1,61 +1,39 @@
 ﻿@page "/"
+<header>
+    <DeerDiary_Frontend.Components.Layout.NavMenu></DeerDiary_Frontend.Components.Layout.NavMenu>
+</header>
 
-<div class="container-fluid p-4" style="background-color: rgb(144, 83, 39); color: white">
-    <!--Main container with padding-->
-    <!-- Top Bar -->
-    <div class="row mb-4 align-items-center">
-        <div class="col-md-8 d-flex">
-            <div class="p-2">
-                <img src="path_to_image" alt="Webseite Bild" width="100">
-            </div>
-            <div class="p-2 flex-grow-1 d-flex align-items-center">
-                <a href="#">Link, der auf der Journalseite führt</a>
-            </div>
-        </div>
-        <div class="col-md-4 text-end">
-            <div class="user-profile d-flex justify-content-end align-items-center">
-                <img src="path_to_profile_image" alt="User Profile" class="rounded-circle" width="50" height="50">
-                <span class="ms-2">Username</span>
-            </div>
-        </div>
-    </div>
+<body >
+<div class="container-fluid p-4" style="background-color: rgb(144, 83, 39); color: white; height:auto;">
 
-    <!-- Main Content -->
     <div class="row" >
-        <!-- Left Sidebar -->
-        <div class="col-md-2 rounded-3 p-0 d-flex flex-column" style="background-color: rgb(187, 148, 87); min-height: 100vh;">
-            <div class="list-group flex-grow-1">
-                <button class="list-group-item mb-1" style="background-color: rgb(180, 107, 65); color: white;">Button 1</button>
-                <button class="list-group-item mb-1" style="background-color: rgb(180, 107, 65); color: white;">Button 2</button>
-                <button class="list-group-item mb-1" style="background-color: rgb(180, 107, 65); color: white;">Button 3</button>
-                <button class="list-group-item mb-1" style="background-color: rgb(180, 107, 65); color: white;">Button 4</button>
-                <button class="list-group-item mb-1" style="background-color: rgb(180, 107, 65); color: white;">Button 5</button>
-                <button class="list-group-item mt-auto" style="background-color: rgb(180, 107, 65); color: white;">Button 6</button>
-            </div>
-        </div>
+        <div class="col-md-2 rounded-3 p-0 d-flex flex-column" style="background-color: rgb(187, 148, 87); ">
+               
+            <button class="list-group-item" style="background-color: #90633C; color: white;">Button 1</button>
 
-        <!-- Right Content -->
-        <div class="col-md-9">
-            <!-- Input for Journal Title -->
+                <button class="list-group-item" style="background-color: #90633C; color: white; align-self: flex-end;">Create Page  <img src="/bootstrap/images/plus.png" style="overflow: hidden; height: 2vh; padding: 0;" /> </button>
+            </div>
+
+        <div class="col-md-9" style="min-height: 80vh;">
             <div class="form-group mb-4">
                 <label for="journalTitle" class="form-label">Eingabe Feld zum Titel der Journal eintrag zu schreiben</label>
                 <input type="text" class="form-control" id="journalTitle" placeholder="Titel hier eingeben">
             </div>
 
-            <!-- Input for Journal Entry -->
             <div class="form-group mb-4">
                 <label for="journalEntry" class="form-label">Eingabe Feld zum Journal Eintrag zu schreiben</label>
-                <textarea class="form-control" id="journalEntry" rows="10" placeholder="Eintrag hier schreiben" style="min-height: 78vh;"></textarea>
+                <textarea class="form-control" id="journalEntry" rows="10" placeholder="Eintrag hier schreiben" style="min-height: 70vh;"></textarea>
             </div>
 
-            <!-- Question and Chat Link -->
             <div class="d-grid">
-                <button style="background-color: rgb(180, 107, 65);">Frage></button>
+                    <button style="background-color: rgb(180, 107, 65); color: white;" href="/chat">Zur Fragen <img src="/bootstrap/images/right-arrow.png" style= "overflow: hidden; height: 2vh; padding: 0;" /></button>
+                
             </div>
         </div>
     </div>
 </div>
+</body>
 
 @code {
-    // Backend logic goes here
+    
 }

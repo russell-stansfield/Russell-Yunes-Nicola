@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DeerDiary_Backend.Models
 {
-    public class User: IdentityUser
+    public class SignUpModel
     {
         [Required]
         public string _Username { get; set; }

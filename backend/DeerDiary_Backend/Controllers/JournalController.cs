@@ -1,44 +1,63 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DeerDiary_Backend.Data;
+using DeerDiary_Backend.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeerDiary_Backend.Controllers
 {
+    [Route("[controller]/[action]")]
+    //[Authorize]
     public class JournalController : Controller
     {
-        // Return random question
-        public ContentResult GetRandomQuestion()
+        private readonly ApplicationDbContext _Context;
+        public JournalController(ApplicationDbContext context)
         {
-            return Content("message", "text/plain");
+            _Context = context;
+        }
+
+
+        // Return random question
+        public ContentResult RandomQuestion()
+        {
+            string content = _Context.JournalEntries.FirstOrDefault().Text;
+
+            return Content(content);
+            //return Content("Random Question", "text/plain");
         }
 
         // Return all journal entries
-        public ContentResult GetAllEntries()
+        public ContentResult AllEntries()
         {
             return Content("message", "text/plain");
         }
 
         // Return response to entry
-        public ContentResult GetSpecificQuestion()
+        public ContentResult SpecificQuestion()
         {
             return Content("message", "text/plain");
         }
 
+
+
+
+        // Recieve
+
         // Receive response to specific question
-        public ContentResult PostResponseQuestion()
+        public ContentResult SendResponse(string response)
         {
-            return Content("message", "text/plain");
+
+            return new ContentResult { StatusCode = 200 };
         }
 
         // Receive journal entry
-        public ContentResult PostJournalEntry()
+        public ContentResult PostJournalEntry(JournalEntry entry)
         {
-            return Content("message", "text/plain");
-        }
 
-        // Change settings
-        public ContentResult PutSettings()
-        {
-            return Content("message", "text/plain");
+
+
+            return new ContentResult { StatusCode = 200 };
         }
     }
 }

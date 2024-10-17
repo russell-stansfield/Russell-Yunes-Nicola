@@ -60,3 +60,10 @@ h1:focus {
 .background-image {
     overflow-y: hidden
 }
+.fade-in {
+    animation: fadeIn 0.5s;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s;
+}

@@ -17,14 +17,12 @@ namespace DeerDiary_Backend.Controllers
             _Context = context;
         }
 
-
         // Return random question
         public ContentResult RandomQuestion()
         {
             string content = _Context.JournalEntries.FirstOrDefault().Text;
 
             return Content(content);
-            //return Content("Random Question", "text/plain");
         }
 
         // Return all journal entries
@@ -52,7 +50,7 @@ namespace DeerDiary_Backend.Controllers
         }
 
         // Receive journal entry
-        public ContentResult PostJournalEntry(JournalEntry entry)
+        public ContentResult PostJournalEntry(JournalEntries entry)
         {
 
 

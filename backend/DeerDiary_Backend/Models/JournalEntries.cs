@@ -2,14 +2,13 @@
 
 namespace DeerDiary_Backend.Models
 {
-    [Table("JournalEntries")]
-    public class JournalEntry
+    public class JournalEntries
     {
-        [Column("JournalId")]
+        [Column("JournalEntryId")]
         public int? Id { get; set; }
         [Column("JournalDate")]
-        public string Date { get; set; }
+        public string? Date { get; set; }
         [Column("JournalText")]
-        public string Text { get; set; }
+        public string? Text { get; set; }
     }
 }

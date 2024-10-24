@@ -16,11 +16,9 @@ namespace DeerDiary_Backend.Data
         {
             base.OnModelCreating(builder);
 
-            //builder.HasDefaultSchema("identity");
-
-            builder.Entity<JournalEntry>().ToTable("JournalEntries", "");
+            builder.Entity<JournalEntries>().ToTable("JournalEntry");
         }
 
-        public DbSet<JournalEntry> JournalEntries { get; set; }
+        public DbSet<JournalEntries> JournalEntries { get; set; }
     }
 }

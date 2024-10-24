@@ -8,7 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs_old" />
+
+    <Content Remove="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +29,10 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

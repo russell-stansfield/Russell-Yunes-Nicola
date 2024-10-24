@@ -15,10 +15,12 @@ namespace DeerDiary_Backend.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            builder.Entity<JournalEntries>().ToTable("JournalEntry");
         }
 
-        public DbSet<JournalEntries> JournalEntries { get; set; }
+        public virtual DbSet<JournalEntry> JournalEntries { get; set; }
+        public virtual DbSet<RandomQuestion> RandomQuestions { get; set; }
+        public virtual DbSet<Reply> Replies { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+
     }
 }

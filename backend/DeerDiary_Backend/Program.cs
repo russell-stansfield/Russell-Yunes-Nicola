@@ -15,25 +15,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>  options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-//builder.Services.AddAuthentication(option =>
-//{
-//    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//    option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-//}).AddJwtBearer();
-//builder.Services.AddControllersWithViews(option =>
-//{
-//    option.SaveToken = true;
-//    option.RequireHttpsPermanent = true;
-//    option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
-//    {
-//        ValidateIssuer = true,
-//        ValidateAudience = true,
-//        ValidAudience = "",
-//        ValidIssuer = "",
-//        IssuerSigningKey = ""
-//    };
-//});
+
 
 var app = builder.Build();
 

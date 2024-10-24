@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeerDiary_Backend.Models
 {
-    public class User: IdentityUser
+    public class User
     {
-        [Required]
-        public string _Username { get; set; }
-        [Required]
-        [EmailAddress]
-        public string _Email { get; set; }
-        [Required]
-        public string _Password { get; set; }
+        [Column("UserId")]
+        public int Id { get; set; }
+        [Column("UserName")]
+        public string _username { get; set; }
+        [Column("UserPassword")]
+        public string _userpassword { get; set; }
+        [Column("JournalId")]
+        public string _usermail { get; set; }
     }
 }

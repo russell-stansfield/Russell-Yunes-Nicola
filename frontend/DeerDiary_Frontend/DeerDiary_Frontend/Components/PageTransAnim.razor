@@ -1,0 +1,36 @@
+﻿@inject IJSRuntime JSRuntime
+
+<div @ref="ContentDiv" class="animate__animated">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private ElementReference ContentDiv;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Apply fade-in effect when the component is first rendered
+            await ApplyAnimation("animate__fadeIn");
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // Apply fade-out effect before rendering new content
+        await ApplyAnimation("animate__fadeOut");
+        await Task.Delay(500); // Delay to allow fade-out animation to complete
+
+        // Apply fade-in effect again after the new content has been rendered
+        await ApplyAnimation("animate__fadeIn");
+    }
+
+    private async Task ApplyAnimation(string animationClass)
+    {
+        // Use JSInterop to set the class dynamically
+        await JSRuntime.InvokeVoidAsync("setClass", ContentDiv, $"animate__animated {animationClass}");
+    }
+}

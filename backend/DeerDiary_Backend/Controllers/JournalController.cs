@@ -8,7 +8,7 @@ using ZstdSharp.Unsafe;
 namespace DeerDiary_Backend.Controllers
 {
     [Route("[controller]/[action]")]
-    //[Authorize]
+    [Authorize]
     public class JournalController : Controller
     {
         private readonly ApplicationDbContext _Context;
@@ -49,9 +49,6 @@ namespace DeerDiary_Backend.Controllers
 
                 return Ok(content[rand.Next(0, content.Count - 1)]._text);
         }
-
-
-
 
         [HttpPost]
         public ContentResult SendResponse([FromBody] Reply response)

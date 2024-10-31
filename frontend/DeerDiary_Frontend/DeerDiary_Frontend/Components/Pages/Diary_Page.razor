@@ -1,39 +1,78 @@
 ﻿@page "/"
+@inject HttpClient Http  
+@inject NavigationManager NavigationManager 
+@* @inject AuthenticationStateProvider AuthenticationStateProvider // Injecting AuthenticationStateProvider *@
+
 <header>
     <DeerDiary_Frontend.Components.Layout.NavMenu></DeerDiary_Frontend.Components.Layout.NavMenu>
 </header>
 
-<body >
-<div class="container-fluid p-4" style="background-color: #FFF0C7; color: black; height:auto;">
-
-    <div class="row" >
-        <div class="col-md-2 rounded-3 p-0 d-flex flex-column" style="background-color: #C09173; padding: 30px;">
-               
-            <button class="list-group-item" style="background-color: #97946B; color: white;">Button 1</button>
-
-                <button class="list-group-item" style="background-color: #97946B; color: white;">Create Page  <img src="/bootstrap/images/plus.png" style="overflow: hidden; height: 2vh; padding: 0;" /> </button>
+<body>
+    <div class="container-fluid p-4" style="background-color: #FFF0C7; color: black; height:auto;">
+        <div class="row">
+            <div class="col-md-2 rounded-3 p-0 d-flex flex-column" style="background-color: #C09173; padding: 30px;">
+                <button class="list-group-item" style="background-color: #97946B; color: white;">Button 1</button>
+                <button class="list-group-item" style="background-color: #97946B; color: white;">Create Page  <img src="/bootstrap/images/plus.png" style="overflow: hidden; height: 2vh; padding: 0;" /></button>
             </div>
 
-        <div class="col-md-9" style="min-height: 80vh;">
-            <div class="form-group mb-4">
-                <label for="journalTitle" class="form-label">Eingabe Feld zum Titel der Journal eintrag zu schreiben</label>
-                <input type="text" class="form-control" id="journalTitle" placeholder="Titel hier eingeben">
-            </div>
+            <div class="col-md-9" style="min-height: 80vh;">
+                <div class="form-group mb-4">
+                    <label for="journalTitle" class="form-label">Eingabe Feld zum Titel der Journal eintrag zu schreiben</label>
+                    <InputText @bind-Value="journalEntryModel.Title" class="form-control" id="journalTitle" placeholder="Titel hier eingeben" />
+                </div>
 
-            <div class="form-group mb-4" style="margin-bottom: 12px">
-                <label for="journalEntry" class="form-label">Eingabe Feld zum Journal Eintrag zu schreiben</label>
-                <textarea class="form-control" id="journalEntry" rows="10" placeholder="Eintrag hier schreiben" style="height: 62vh;"></textarea>
-            </div>
+                <div class="form-group mb-4" style="margin-bottom: 12px">
+                    <label for="journalEntry" class="form-label">Eingabe Feld zum Journal Eintrag zu schreiben</label>
+                    <InputTextArea @bind-Value="journalEntryModel.Text" class="form-control" id="journalEntry" rows="10" placeholder="Eintrag hier schreiben" style="height: 62vh;"></InputTextArea>
+                </div>
 
-            <div class="d-grid">
-                    <button class="list-group-item rounded" style="background-color: #97946B; color: white;" href="/chat">Zur Fragen <img src="/bootstrap/images/right-arrow.png" style= "overflow: hidden; height: 2vh; padding: 0;" /></button>
-                
+                <div class="d-grid">
+                    <button @onclick="SubmitJournalEntry" class="list-group-item rounded" style="background-color: #97946B; color: white;">
+                        Zur Fragen <img src="/bootstrap/images/right-arrow.png" style="overflow: hidden; height: 2vh; padding: 0;" />
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 
 @code {
-    
+    private JournalEntryModel journalEntryModel = new JournalEntryModel();
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     // Check if the user is authenticated
+    //     // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    //     // var user = authState.User;
+
+    //     // if (!user.Identity.IsAuthenticated)
+    //     // {
+    //     //     // Redirect to login page if user is not authenticated
+    //     //     NavigationManager.NavigateTo("/login");
+    //     // }
+    // }
+
+    private async Task SubmitJournalEntry()
+    {
+        // Send the journal entry to the backend
+        var response = await Http.PostAsJsonAsync("/Journal/PostJournalEntry", journalEntryModel);
+
+        if (response.IsSuccessStatusCode)
+        {
+            // Handle success (e.g., navigate to another page or show a message)
+            NavigationManager.NavigateTo("/chat"); // Redirect to chat page
+        }
+        else
+        {
+            // Handle error (e.g., display an error message)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Submission failed: {errorMessage}");
+        }
+    }
+
+    public class JournalEntryModel
+    {
+        public string Title { get; set; }
+        public string Text { get; set; }
+    }
 }

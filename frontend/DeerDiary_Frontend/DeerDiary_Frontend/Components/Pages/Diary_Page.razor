@@ -1,7 +1,7 @@
 ﻿@page "/"
 @inject HttpClient Http  
 @inject NavigationManager NavigationManager 
-@inject AuthenticationStateProvider AuthenticationStateProvider // Injecting AuthenticationStateProvider
+@* @inject AuthenticationStateProvider AuthenticationStateProvider // Injecting AuthenticationStateProvider *@
 
 <header>
     <DeerDiary_Frontend.Components.Layout.NavMenu></DeerDiary_Frontend.Components.Layout.NavMenu>
@@ -39,18 +39,18 @@
 @code {
     private JournalEntryModel journalEntryModel = new JournalEntryModel();
 
-    protected override async Task OnInitializedAsync()
-    {
-        // Check if the user is authenticated
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     // Check if the user is authenticated
+    //     // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    //     // var user = authState.User;
 
-        if (!user.Identity.IsAuthenticated)
-        {
-            // Redirect to login page if user is not authenticated
-            NavigationManager.NavigateTo("/login");
-        }
-    }
+    //     // if (!user.Identity.IsAuthenticated)
+    //     // {
+    //     //     // Redirect to login page if user is not authenticated
+    //     //     NavigationManager.NavigateTo("/login");
+    //     // }
+    // }
 
     private async Task SubmitJournalEntry()
     {

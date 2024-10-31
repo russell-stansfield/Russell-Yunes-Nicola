@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeerDiary_Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241031141712_CreateDB")]
+    [Migration("20241031144730_CreateDB")]
     partial class CreateDB
     {
         /// <inheritdoc />
@@ -36,7 +36,7 @@ namespace DeerDiary_Backend.Migrations
 
                     b.Property<int>("_randomquestionid")
                         .HasColumnType("int")
-                        .HasColumnName("RandomQuestionId")
+                        .HasColumnName("fk_RandomQuestionId")
                         .HasAnnotation("Relational:JsonPropertyName", "RandomQuestionId");
 
                     b.Property<string>("_text")
@@ -51,7 +51,7 @@ namespace DeerDiary_Backend.Migrations
 
                     b.Property<int>("_userid")
                         .HasColumnType("int")
-                        .HasColumnName("UserId")
+                        .HasColumnName("fk_UserId")
                         .HasAnnotation("Relational:JsonPropertyName", "UserId");
 
                     b.HasKey("Id");
@@ -96,13 +96,9 @@ namespace DeerDiary_Backend.Migrations
                         .HasColumnName("ReplyGeneratedQuestion")
                         .HasAnnotation("Relational:JsonPropertyName", "ReplyGeneratedQuestion");
 
-                    b.Property<int>("_journalentryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("_journalentryid")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("JournalEntryId")
+                    b.Property<int>("_journalentryid")
+                        .HasColumnType("int")
+                        .HasColumnName("fk_JournalEntryId")
                         .HasAnnotation("Relational:JsonPropertyName", "JournalEntryId");
 
                     b.Property<string>("_text")
@@ -113,7 +109,7 @@ namespace DeerDiary_Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("_journalentryId");
+                    b.HasIndex("_journalentryid");
 
                     b.ToTable("Replies");
                 });
@@ -172,7 +168,7 @@ namespace DeerDiary_Backend.Migrations
                 {
                     b.HasOne("DeerDiary_Backend.Models.JournalEntry", "_journalentry")
                         .WithMany()
-                        .HasForeignKey("_journalentryId")
+                        .HasForeignKey("_journalentryid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

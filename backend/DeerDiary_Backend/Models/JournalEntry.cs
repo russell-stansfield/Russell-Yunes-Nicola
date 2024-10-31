@@ -22,13 +22,13 @@ namespace DeerDiary_Backend.Models
 
         public string? _title { get; set; }
 
-        [Column("RandomQuestionId")]
-        [JsonPropertyName("RandomQuestionId")]
+        [Column("fk_RandomQuestionId")]
+        [JsonPropertyName("fk_RandomQuestionId")]
         public int _randomquestionid { get; set; }
         public RandomQuestion _randomquestion { get; set; }
 
-        [Column("UserId")]
-        [JsonPropertyName("UserId")]
+        [Column("fk_UserId")]
+        [JsonPropertyName("fk_UserId")]
         public int _userid { get; set; }
         public User _user { get; set; }
     }

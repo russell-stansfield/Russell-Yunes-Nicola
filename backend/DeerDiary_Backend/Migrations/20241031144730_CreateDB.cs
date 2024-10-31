@@ -53,21 +53,21 @@ namespace DeerDiary_Backend.Migrations
                     JournalDate = table.Column<string>(type: "longtext", nullable: true),
                     JournalText = table.Column<string>(type: "longtext", nullable: true),
                     JournalTitle = table.Column<string>(type: "longtext", nullable: true),
-                    RandomQuestionId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    fk_RandomQuestionId = table.Column<int>(type: "int", nullable: false),
+                    fk_UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_JournalEntries", x => x.JournalId);
                     table.ForeignKey(
-                        name: "FK_JournalEntries_RandomQuestions_RandomQuestionId",
-                        column: x => x.RandomQuestionId,
+                        name: "FK_JournalEntries_RandomQuestions_fk_RandomQuestionId",
+                        column: x => x.fk_RandomQuestionId,
                         principalTable: "RandomQuestions",
                         principalColumn: "RandomQuestionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_JournalEntries_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_JournalEntries_Users_fk_UserId",
+                        column: x => x.fk_UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -82,15 +82,14 @@ namespace DeerDiary_Backend.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     ReplyText = table.Column<string>(type: "longtext", nullable: false),
                     ReplyGeneratedQuestion = table.Column<string>(type: "longtext", nullable: false),
-                    JournalEntryId = table.Column<string>(type: "longtext", nullable: false),
-                    _journalentryId = table.Column<int>(type: "int", nullable: false)
+                    fk_JournalEntryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Replies", x => x.ReplyId);
                     table.ForeignKey(
-                        name: "FK_Replies_JournalEntries__journalentryId",
-                        column: x => x._journalentryId,
+                        name: "FK_Replies_JournalEntries_fk_JournalEntryId",
+                        column: x => x.fk_JournalEntryId,
                         principalTable: "JournalEntries",
                         principalColumn: "JournalId",
                         onDelete: ReferentialAction.Cascade);
@@ -98,19 +97,19 @@ namespace DeerDiary_Backend.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JournalEntries_RandomQuestionId",
+                name: "IX_JournalEntries_fk_RandomQuestionId",
                 table: "JournalEntries",
-                column: "RandomQuestionId");
+                column: "fk_RandomQuestionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JournalEntries_UserId",
+                name: "IX_JournalEntries_fk_UserId",
                 table: "JournalEntries",
-                column: "UserId");
+                column: "fk_UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Replies__journalentryId",
+                name: "IX_Replies_fk_JournalEntryId",
                 table: "Replies",
-                column: "_journalentryId");
+                column: "fk_JournalEntryId");
         }
 
         /// <inheritdoc />

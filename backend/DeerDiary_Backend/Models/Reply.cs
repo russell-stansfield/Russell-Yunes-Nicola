@@ -15,10 +15,9 @@ namespace DeerDiary_Backend.Models
         [JsonPropertyName("ReplyGeneratedQuestion")]
         public string _generatedquestion { get; set; }
 
-        [Column("JournalEntryId")]
-        [JsonPropertyName("JournalEntryId")]
-        public string _journalentryid { get; set; }
-
+        [Column("fk_JournalEntryId")]
+        [JsonPropertyName("fk_JournalEntryId")]
+        public int _journalentryid { get; set; }
         public JournalEntry _journalentry { get; set; }
     }
 }

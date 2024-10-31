@@ -1,31 +1,62 @@
 ﻿@page "/register"
+@inject HttpClient Http 
+@inject NavigationManager NavigationManager
 
 <div style="background-image: url('/bootstrap/images/RegisteringDeer.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;" class="login-background">
     <div class="container-login" style="max-width: 400px; width: 100%; background-color: rgba(0, 0, 0, 0.5); padding: 20px;">
         <h4 class="text-center mb-4 text-light">Registration Page</h4>
 
-        <form>
+        <EditForm Model="@registrationModel" OnValidSubmit="HandleRegistration">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
             <!-- Username Field -->
             <div class="mb-3">
                 <label for="username" class="form-label text-light">Username:</label>
-                <input type="text" id="username" class="form-control" placeholder="Enter your username">
+                <InputText id="username" @bind-Value="registrationModel.Username" class="form-control" placeholder="Enter your username" />
             </div>
 
             <!-- Password Field -->
             <div class="mb-4">
                 <label for="password" class="form-label text-light">Password:</label>
-                <input type="password" id="password" class="form-control" placeholder="Enter your password">
+                <InputText id="password" type="password" @bind-Value="registrationModel.Password" class="form-control" placeholder="Enter your password" />
             </div>
 
-            <!-- Login Button -->
+            <!-- Register Button -->
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
             </div>
 
-            <!-- Register Link -->
+            <!-- Login Link -->
             <div class="text-center mt-3">
                 <label class="text-light">Have an account? <a href="/login" class="text-primary">Login here</a>.</label>
             </div>
-        </form>
+        </EditForm>
     </div>
 </div>
+
+@code {
+    private RegistrationModel registrationModel = new RegistrationModel();
+
+    private async Task HandleRegistration()
+    {
+        var response = await Http.PostAsJsonAsync("/api/register", registrationModel);
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+        else
+        {
+            var errorMessage = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"Registration failed: {errorMessage}");
+        }
+    }
+
+    public class RegistrationModel
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+}

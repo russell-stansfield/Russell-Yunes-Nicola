@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DeerDiary_Backend.Controllers
 {
     [Route("[controller]/[action]")]
-    //[Authorize]
+    [Authorize]
     public class JournalController : Controller
     {
         private readonly ApplicationDbContext _Context;
@@ -37,9 +37,6 @@ namespace DeerDiary_Backend.Controllers
             return Content("message", "text/plain");
         }
 
-
-
-
         // Recieve
 
         // Receive response to specific question
@@ -52,9 +49,6 @@ namespace DeerDiary_Backend.Controllers
         // Receive journal entry
         public ContentResult PostJournalEntry(JournalEntry entry)
         {
-
-
-
             return new ContentResult { StatusCode = 200 };
         }
     }

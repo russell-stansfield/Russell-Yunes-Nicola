@@ -1,9 +1,9 @@
 ﻿using DeerDiary_Backend.Data;
 using DeerDiary_Backend.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using ZstdSharp.Unsafe;
 
 namespace DeerDiary_Backend.Controllers
 {
@@ -18,38 +18,56 @@ namespace DeerDiary_Backend.Controllers
         }
 
         // Return random question
+        [HttpGet]
         public ContentResult RandomQuestion()
         {
-            string content = _Context.JournalEntries.FirstOrDefault()._text;
+            List<RandomQuestion> content = _Context.RandomQuestions.ToList();
 
-            return Content(content);
+            Random rand = new Random();
+
+            return Content(content[rand.Next(0, content.Count - 1)]._text);
         }
 
         // Return all journal entries
-        public ContentResult AllEntries()
+        [HttpGet]
+        public IActionResult AllEntries()
         {
-            return Content("message", "text/plain");
+
+            List<JournalEntry> entries = _Context.JournalEntries.Where(u => u._user._username == "Alice" && u._user._userpassword == "password123").ToList();
+
+            return Ok(entries);
         }
 
         // Return response to entry
-        public ContentResult SpecificQuestion()
+        [HttpGet]
+        public IActionResult SpecificQuestion()
         {
-            return Content("message", "text/plain");
+                
+                List<Reply> content = _Context.Replies.ToList();
+
+                Random rand = new Random();
+
+                return Ok(content[rand.Next(0, content.Count - 1)]._text);
         }
 
-        // Recieve
-
-        // Receive response to specific question
-        public ContentResult SendResponse(string response)
+        [HttpPost]
+        public ContentResult SendResponse([FromBody] Reply response)
         {
+            _Context.Replies.Add(response);
+
+            _Context.SaveChanges();
 
             return new ContentResult { StatusCode = 200 };
         }
-
-        // Receive journal entry
-        public ContentResult PostJournalEntry(JournalEntry entry)
+        [HttpPost]
+        public ContentResult PostJournalEntry([FromBody]JournalEntry entry)
         {
-            return new ContentResult { StatusCode = 200 };
+
+            _Context.JournalEntries.Add(entry);
+
+            _Context.SaveChanges();
+
+            return Content(entry._title);
         }
     }
 }

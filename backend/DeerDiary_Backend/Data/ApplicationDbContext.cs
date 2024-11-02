@@ -21,6 +21,7 @@ namespace DeerDiary_Backend.Data
         public virtual DbSet<RandomQuestion> RandomQuestions { get; set; }
         public virtual DbSet<Reply> Replies { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<TokenBlacklist> TokenBlacklists { get; set; }
 
     }
 }

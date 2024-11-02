@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.EntityFrameworkCore.Metadata;
 
 #nullable disable
@@ -25,6 +26,21 @@ namespace DeerDiary_Backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RandomQuestions", x => x.RandomQuestionId);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "TokenBlacklists",
+                columns: table => new
+                {
+                    TokenId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Token = table.Column<string>(type: "longtext", nullable: false),
+                    TokenExpiry = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TokenBlacklists", x => x.TokenId);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -117,6 +133,9 @@ namespace DeerDiary_Backend.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Replies");
+
+            migrationBuilder.DropTable(
+                name: "TokenBlacklists");
 
             migrationBuilder.DropTable(
                 name: "JournalEntries");

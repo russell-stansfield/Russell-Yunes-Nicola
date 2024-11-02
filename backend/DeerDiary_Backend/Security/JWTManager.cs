@@ -62,21 +62,5 @@ namespace DeerDiary_Backend.Security
 
 
         }
-
-        // Method to decode Base64 URL encoded string
-        private byte[] ParseBase64Url(string base64Url)
-        {
-            // Replace URL-safe characters
-            var base64 = base64Url.Replace('-', '+').Replace('_', '/');
-
-            // Pad the string to make its length a multiple of 4
-            switch (base64.Length % 4)
-            {
-                case 2: base64 += "=="; break;
-                case 3: base64 += "="; break;
-            }
-
-            return Convert.FromBase64String(base64);
-        }
     }
 }

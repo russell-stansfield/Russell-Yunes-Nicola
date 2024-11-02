@@ -4,6 +4,7 @@ using DeerDiary_Backend.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,7 @@ namespace DeerDiary_Backend.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Logout()
         {
 
@@ -63,6 +65,7 @@ namespace DeerDiary_Backend.Controllers
 
             return Ok();
         }
+
         [HttpPost]
         public IActionResult Register([FromBody] User user)
         {

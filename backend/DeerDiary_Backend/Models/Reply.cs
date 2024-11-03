@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace DeerDiary_Backend.Models
@@ -6,18 +7,17 @@ namespace DeerDiary_Backend.Models
     public class Reply
     {
         [Column("ReplyId")]
-        [JsonPropertyName("ReplyId")]
-        public int Id { get; set; }
+        public int ReplyId { get; set; }
         [Column("ReplyText")]
-        [JsonPropertyName("ReplyText")]
-        public string _text { get; set; }
+        [Required(ErrorMessage = "Reply text missing")]
+        public string ReplyText { get; set; }
         [Column("ReplyGeneratedQuestion")]
-        [JsonPropertyName("ReplyGeneratedQuestion")]
-        public string _generatedquestion { get; set; }
+        [Required(ErrorMessage = "Reply generated question missing")]
+        public string ReplyGeneratedQuestion { get; set; }
 
         [Column("fk_JournalEntryId")]
-        [JsonPropertyName("fk_JournalEntryId")]
-        public int _journalentryid { get; set; }
+        [Required(ErrorMessage = "Relation to JournalEntry missing")]
+        public int _JournalEntryId { get; set; }
         public JournalEntry _journalentry { get; set; }
     }
 }

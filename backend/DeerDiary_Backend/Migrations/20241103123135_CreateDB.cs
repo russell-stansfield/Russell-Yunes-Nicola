@@ -50,7 +50,7 @@ namespace DeerDiary_Backend.Migrations
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    UserName = table.Column<string>(type: "longtext", nullable: false),
+                    UserName = table.Column<string>(type: "longtext", nullable: true),
                     UserPassword = table.Column<string>(type: "longtext", nullable: false),
                     UserMail = table.Column<string>(type: "longtext", nullable: false)
                 },
@@ -66,9 +66,9 @@ namespace DeerDiary_Backend.Migrations
                 {
                     JournalId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    JournalDate = table.Column<string>(type: "longtext", nullable: true),
-                    JournalText = table.Column<string>(type: "longtext", nullable: true),
-                    JournalTitle = table.Column<string>(type: "longtext", nullable: true),
+                    JournalDate = table.Column<string>(type: "longtext", nullable: false),
+                    JournalText = table.Column<string>(type: "longtext", nullable: false),
+                    JournalTitle = table.Column<string>(type: "longtext", nullable: false),
                     fk_RandomQuestionId = table.Column<int>(type: "int", nullable: false),
                     fk_UserId = table.Column<int>(type: "int", nullable: false)
                 },

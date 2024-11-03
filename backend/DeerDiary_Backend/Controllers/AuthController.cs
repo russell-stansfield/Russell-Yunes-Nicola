@@ -34,15 +34,17 @@ namespace DeerDiary_Backend.Controllers
         [HttpGet]
         public IActionResult Login([FromBody] User user) {
 
-            if (_Context.Users.Where(x =>
-                (x._username == user._username || x._usermail == user._usermail) &&
-                x._userpassword == user._userpassword).FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                return Content(_Jwtmanager.GenerateJwtToken(user._username));
+                if (_Context.Users.Where(x =>
+                (x.UserMail == user.UserMail) &&
+                x.UserPassword == user.UserPassword).FirstOrDefault() != null)
+                {
+                    return Content(_Jwtmanager.GenerateJwtToken(user.UserName));
+                }
+                return Unauthorized();
             }
-            
-
-            return Unauthorized();
+            return BadRequest();
         }
 
         [HttpPost]
@@ -58,8 +60,8 @@ namespace DeerDiary_Backend.Controllers
 
             _Context.TokenBlacklists.Add(new TokenBlacklist
             {
-                _token = accessToken.ToString(),
-                _expiry = expiry
+                Token = accessToken.ToString(),
+                TokenExpiry = expiry
             });
             _Context.SaveChanges();
 
@@ -69,16 +71,20 @@ namespace DeerDiary_Backend.Controllers
         [HttpPost]
         public IActionResult Register([FromBody] User user)
         {
-            if (_Context.Users.Where(x =>
-                (x._username == user._username || x._usermail == user._usermail) &&
-                x._userpassword == user._userpassword).FirstOrDefault() == null)
+            if (ModelState.IsValid)
             {
-                _Context.Users.Add(user);
-                _Context.SaveChanges();
-                return Ok();
+                if (_Context.Users.Where(x =>
+                (x.UserName == user.UserName || x.UserMail == user.UserMail) &&
+                x.UserPassword == user.UserPassword).FirstOrDefault() == null)
+                {
+                    _Context.Users.Add(user);
+                    _Context.SaveChanges();
+                    return Ok();
+                }
+                return Conflict();
             }
 
-            return Conflict();
+            return BadRequest(ModelState);
         }
     }
 

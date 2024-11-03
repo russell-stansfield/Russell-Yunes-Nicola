@@ -47,20 +47,15 @@ namespace DeerDiary_Backend.Security
 
         public bool VerifyTokenValidity(SecurityToken token) 
         {
-
             using (var scope = _scopeFactory.CreateScope())
             {
                 var Context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
                 var tokenInBlacklist = Context.TokenBlacklists
-                    .Any(t => t._token.Contains(token.ToString()) && t._expiry > DateTime.UtcNow);
+                    .Any(t => t.Token.Contains(token.ToString()) && t.TokenExpiry > DateTime.UtcNow);
 
-                Console.WriteLine("Token: " + token.ToString() + " " + "Is in DB?: " + tokenInBlacklist);
-                Console.WriteLine("From DB");
                 return !tokenInBlacklist;
             }
-
-
         }
     }
 }

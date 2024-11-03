@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeerDiary_Backend.Models
 {
@@ -6,9 +7,11 @@ namespace DeerDiary_Backend.Models
     {
         [Column("TokenId")]
         public int Id { get; set; }
+        [Required(ErrorMessage = "Token content missing")]
         [Column("Token")]
-        public string _token { get; set; }
+        public string Token { get; set; }
+        [Required(ErrorMessage = "Token expiry missing")]
         [Column("TokenExpiry")]
-        public DateTime _expiry { get; set; }
+        public DateTime TokenExpiry { get; set; }
     }
 }

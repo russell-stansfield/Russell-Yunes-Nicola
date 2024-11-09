@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace DeerDiary_Backend.Models
+namespace DeerDiary_Frontend.Models
 {
     public class RandomQuestion
     {

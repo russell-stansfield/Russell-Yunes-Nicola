@@ -1,10 +1,9 @@
-﻿using Org.BouncyCastle.Asn1.Cmp;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace DeerDiary_Backend.Models
+namespace DeerDiary_Frontend.Models
 {
     [DataContract]
     public class User
@@ -17,7 +16,7 @@ namespace DeerDiary_Backend.Models
         [Required(ErrorMessage = "User password missing")]
         [Column("UserPassword")]
         public string UserPassword { get; set; }
-        [EmailAddress (ErrorMessage = "Invalid E-Mail format")]
+        [EmailAddress(ErrorMessage = "Invalid E-Mail format")]
         [Column("UserMail")]
         public string? UserMail { get; set; }
     }

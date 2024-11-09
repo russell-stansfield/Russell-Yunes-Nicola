@@ -4,6 +4,7 @@ using DeerDiary_Backend.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,21 +31,24 @@ namespace DeerDiary_Backend.Controllers
             _Jwtmanager = jwtmanager;
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Login([FromBody] User user) {
 
-            if (_Context.Users.Where(x =>
-                (x._username == user._username || x._usermail == user._usermail) &&
-                x._userpassword == user._userpassword).FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                return Content(_Jwtmanager.GenerateJwtToken(user._username));
+                if (_Context.Users.Where(x =>
+                (x.UserName == user.UserName) &&
+                x.UserPassword == user.UserPassword).FirstOrDefault() != null)
+                {
+                    return Content(_Jwtmanager.GenerateJwtToken(user.UserName));
+                }
+                return Unauthorized();
             }
-            
-
-            return Unauthorized();
+            return BadRequest();
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Authorize]
         public IActionResult Logout()
         {
 
@@ -56,26 +60,31 @@ namespace DeerDiary_Backend.Controllers
 
             _Context.TokenBlacklists.Add(new TokenBlacklist
             {
-                _token = accessToken.ToString(),
-                _expiry = expiry
+                Token = accessToken.ToString(),
+                TokenExpiry = expiry
             });
             _Context.SaveChanges();
 
             return Ok();
         }
+
         [HttpPost]
         public IActionResult Register([FromBody] User user)
         {
-            if (_Context.Users.Where(x =>
-                (x._username == user._username || x._usermail == user._usermail) &&
-                x._userpassword == user._userpassword).FirstOrDefault() == null)
+            if (ModelState.IsValid)
             {
-                _Context.Users.Add(user);
-                _Context.SaveChanges();
-                return Ok();
+                if (_Context.Users.Where(x =>
+                (x.UserName == user.UserName) &&
+                x.UserPassword == user.UserPassword).FirstOrDefault() == null)
+                {
+                    _Context.Users.Add(user);
+                    _Context.SaveChanges();
+                    return Ok();
+                }
+                return Conflict();
             }
 
-            return Conflict();
+            return BadRequest(ModelState);
         }
     }
 

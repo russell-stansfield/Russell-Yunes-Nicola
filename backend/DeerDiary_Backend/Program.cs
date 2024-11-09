@@ -1,27 +1,20 @@
 using DeerDiary_Backend.Data;
-using DeerDiary_Backend.Models;
 using DeerDiary_Backend.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySQL(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddControllers().AddXmlSerializerFormatters();
+builder.Services.AddAuthorization();
 builder.Services.AddSingleton<JWTManager>();
 
 var jwtManager = builder.Services.BuildServiceProvider().GetRequiredService<JWTManager>();
@@ -44,7 +37,6 @@ builder.Services.AddAuthentication(options =>
                  Console.WriteLine("Token has expired.");
                  return false;
              }
-
              return jwtManager.VerifyTokenValidity(token);
          },
          ValidIssuer = builder.Configuration["JWT:ValidAudience"],
@@ -61,16 +53,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
 }
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -78,7 +62,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapRazorPages();
 
 app.Run();

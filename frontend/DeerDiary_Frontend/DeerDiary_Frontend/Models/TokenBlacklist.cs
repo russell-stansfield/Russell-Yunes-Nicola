@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DeerDiary_Backend.Models
+namespace DeerDiary_Frontend.Models
 {
     public class TokenBlacklist
     {

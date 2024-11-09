@@ -50,9 +50,9 @@ namespace DeerDiary_Backend.Migrations
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    UserName = table.Column<string>(type: "longtext", nullable: true),
+                    UserName = table.Column<string>(type: "longtext", nullable: false),
                     UserPassword = table.Column<string>(type: "longtext", nullable: false),
-                    UserMail = table.Column<string>(type: "longtext", nullable: false)
+                    UserMail = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,7 +69,7 @@ namespace DeerDiary_Backend.Migrations
                     JournalDate = table.Column<string>(type: "longtext", nullable: false),
                     JournalText = table.Column<string>(type: "longtext", nullable: false),
                     JournalTitle = table.Column<string>(type: "longtext", nullable: false),
-                    fk_RandomQuestionId = table.Column<int>(type: "int", nullable: false),
+                    fk_RandomQuestionId = table.Column<int>(type: "int", nullable: true),
                     fk_UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -79,8 +79,7 @@ namespace DeerDiary_Backend.Migrations
                         name: "FK_JournalEntries_RandomQuestions_fk_RandomQuestionId",
                         column: x => x.fk_RandomQuestionId,
                         principalTable: "RandomQuestions",
-                        principalColumn: "RandomQuestionId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RandomQuestionId");
                     table.ForeignKey(
                         name: "FK_JournalEntries_Users_fk_UserId",
                         column: x => x.fk_UserId,

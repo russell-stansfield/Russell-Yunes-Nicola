@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeerDiary_Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241103123135_CreateDB")]
+    [Migration("20241109192301_CreateDB")]
     partial class CreateDB
     {
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace DeerDiary_Backend.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("JournalTitle");
 
-                    b.Property<int>("_RandomQuestionId")
+                    b.Property<int?>("_RandomQuestionId")
                         .HasColumnType("int")
                         .HasColumnName("fk_RandomQuestionId")
                         .HasAnnotation("Relational:JsonPropertyName", "fk_RandomQuestionId");
@@ -132,17 +132,17 @@ namespace DeerDiary_Backend.Migrations
 
             modelBuilder.Entity("DeerDiary_Backend.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
                     b.Property<string>("UserMail")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("UserMail");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("UserName");
 
@@ -160,9 +160,7 @@ namespace DeerDiary_Backend.Migrations
                 {
                     b.HasOne("DeerDiary_Backend.Models.RandomQuestion", "_randomquestion")
                         .WithMany()
-                        .HasForeignKey("_RandomQuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("_RandomQuestionId");
 
                     b.HasOne("DeerDiary_Backend.Models.User", "_user")
                         .WithMany()

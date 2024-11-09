@@ -47,7 +47,7 @@ namespace DeerDiary_Backend.Controllers
             return BadRequest();
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
         public IActionResult Logout()
         {

@@ -1,4 +1,5 @@
 ﻿using DeerDiary_Backend.Models;
+using DeerDiary_Backend.Models.RecievedModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;

@@ -22,9 +22,8 @@ namespace DeerDiary_Backend.Models
 
         [Column("fk_RandomQuestionId")]
         [JsonPropertyName("fk_RandomQuestionId")]
-        [Required(ErrorMessage = "Relation to RandomQuestion missing")]
-        public int _RandomQuestionId { get; set; }
-        public RandomQuestion _randomquestion { get; set; }
+        public int? _RandomQuestionId { get; set; }
+        public RandomQuestion? _randomquestion { get; set; }
 
         [Column("fk_UserId")]
         [JsonPropertyName("fk_UserId")]

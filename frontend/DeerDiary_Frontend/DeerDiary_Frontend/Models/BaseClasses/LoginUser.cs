@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace DeerDiary_Frontend.Models
+namespace DeerDiary_Frontend.Models.BaseClasses
 {
-    
+
     public class LoginUser
     {
 

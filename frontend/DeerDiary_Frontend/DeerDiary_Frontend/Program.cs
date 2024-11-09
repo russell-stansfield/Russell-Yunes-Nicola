@@ -1,6 +1,6 @@
 using DeerDiary_Frontend.Client.Pages;
 using DeerDiary_Frontend.Components;
-
+using DeerDiary_Frontend.Auth;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +8,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 builder.Services.AddScoped(sp => new HttpClient() );
+builder.Services.AddSingleton<Token>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

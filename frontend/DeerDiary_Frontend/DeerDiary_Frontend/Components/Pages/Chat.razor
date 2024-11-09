@@ -37,7 +37,7 @@
     protected override async Task OnInitializedAsync()
     {
         // Retrieve the question from the backend
-        var response = await Http.GetAsync("/Chat/GetQuestion");
+        var response = await Http.GetAsync("https://localhost:7050/journal/SpecificQuestion");
 
         if (response.IsSuccessStatusCode)
         {
@@ -53,7 +53,7 @@
     {
         // Send the answer to the backend
         var answerModel = new { Answer = answer };
-        var response = await Http.PostAsJsonAsync("/Chat/PostAnswer", answerModel);
+        var response = await Http.PostAsJsonAsync("https://localhost:7050/journal/SendResponse", answerModel);
 
         if (response.IsSuccessStatusCode)
         {

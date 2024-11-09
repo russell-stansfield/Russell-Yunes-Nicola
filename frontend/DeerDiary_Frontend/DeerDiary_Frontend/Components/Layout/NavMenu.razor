@@ -1,4 +1,10 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7A594F; padding: 1vh 2vw;">
+﻿@rendermode InteractiveServer
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject DeerDiary_Frontend.Auth.Token token
+@using System.Net.Http.Headers
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7A594F; padding: 1vh 2vw;">
     <a class="navbar-brand" href="/">
         <img src="" alt="Logo" style="object-fit: contain; height: 5vh;" />
     </a>
@@ -8,8 +14,37 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
             <li class="nav-item" style="padding: 0vh;">
-                <a class="nav-link" href="/login">Signout</a>
+                <a class="nav-link" @onclick="HandleLogout" href="/login">Signout</a>
             </li>
         </ul>
     </div>
 </nav>
+
+
+@code{
+    private async Task HandleLogout()
+    {
+        Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token._Token);
+
+        var response = await Http.GetAsync("https://localhost:7050/auth/logout");
+
+        if (response.IsSuccessStatusCode)
+        {
+            Console.WriteLine("Purging token " + token._Token);
+
+            token._Token = null;
+
+            NavigationManager.NavigateTo("/login");
+        }
+        else
+        {
+
+            var errorstatus = response.StatusCode;
+            var errorMessage = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"logout failed: {errorstatus}, {errorMessage}");
+        }
+    }
+
+
+}

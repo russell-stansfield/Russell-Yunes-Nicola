@@ -1,5 +1,6 @@
 ﻿using DeerDiary_Backend.Data;
 using DeerDiary_Backend.Models;
+using DeerDiary_Backend.Models.RecievedModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -72,11 +73,33 @@ namespace DeerDiary_Backend.Controllers
             return BadRequest(ModelState);
         }
         [HttpPost]
-        public IActionResult PostJournalEntry([FromBody]JournalEntry entry)
+        public IActionResult PostJournalEntry([FromBody]JournalEntryInput entry)
         {
             if (ModelState.IsValid)
             {
-                _Context.JournalEntries.Add(entry);
+                var accessToken = HttpContext.GetTokenAsync("Bearer", "access_token").Result;
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var jwtToken = tokenHandler.ReadToken(accessToken) as JwtSecurityToken;
+                string subject = jwtToken.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                var User = _Context.Users.Where(u => u.UserName == subject).FirstOrDefault();
+
+                JournalEntry Instance = new JournalEntry()
+                {
+                    JournalText = entry.JournalText,
+                    JournalTitle = entry.JournalTitle
+                };
+
+                if (User is null)
+                {
+                    return Unauthorized();
+                }
+                else Instance._userid = (int)User.Id;
+
+                Instance.JournalDate = DateTime.UtcNow.ToString();
+                Instance._user = User;
+
+                _Context.JournalEntries.Add(Instance);
 
                 _Context.SaveChanges();
 

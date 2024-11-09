@@ -1,7 +1,9 @@
 ﻿@page "/login"
-@inject HttpClient Http 
 @rendermode InteractiveServer
+@inject HttpClient Http 
 @inject NavigationManager NavigationManager 
+@inject DeerDiary_Frontend.Auth.Token token
+
 
 <div style="background-image: url('/bootstrap/images/deer.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;" class="login-background">
     <div class="container-login" style="max-width: 400px; width: 100%; background-color: rgba(0, 0, 0, 0.5); padding: 20px;">
@@ -37,26 +39,20 @@
 </div>
 
 @code {
-    // private LoginModel loginModel = new LoginModel();
-
     private LoginUser loginModel = new LoginUser();
 
 
     private async Task HandleLogin()
     {
-        // Console.WriteLine(JsonSerializer.Serialize(loginModel));
-
-
         var response = await Http.PostAsJsonAsync("https://localhost:7050/auth/login", loginModel);
-
-        Console.WriteLine(loginModel.UserName);
-        Console.WriteLine(loginModel.UserPassword);
-
 
         if (response.IsSuccessStatusCode)
         {
             var result = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(result);
+
+            token._Token = result;
+
+            Console.WriteLine(token._Token);
 
             NavigationManager.NavigateTo("/");
         }
@@ -68,17 +64,5 @@
 
             Console.WriteLine($"Login failed: {errorstatus}, {errorMessage}");
         }
-    }
-
-    public class LoginModel
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
-
-    public class LoginResponse
-    {
-        // Define properties for the response if necessary
-        public string Token { get; set; }
     }
 }

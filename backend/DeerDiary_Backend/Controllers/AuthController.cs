@@ -31,13 +31,13 @@ namespace DeerDiary_Backend.Controllers
             _Jwtmanager = jwtmanager;
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Login([FromBody] User user) {
 
             if (ModelState.IsValid)
             {
                 if (_Context.Users.Where(x =>
-                (x.UserMail == user.UserMail) &&
+                (x.UserName == user.UserName) &&
                 x.UserPassword == user.UserPassword).FirstOrDefault() != null)
                 {
                     return Content(_Jwtmanager.GenerateJwtToken(user.UserName));
@@ -74,7 +74,7 @@ namespace DeerDiary_Backend.Controllers
             if (ModelState.IsValid)
             {
                 if (_Context.Users.Where(x =>
-                (x.UserName == user.UserName || x.UserMail == user.UserMail) &&
+                (x.UserName == user.UserName) &&
                 x.UserPassword == user.UserPassword).FirstOrDefault() == null)
                 {
                     _Context.Users.Add(user);

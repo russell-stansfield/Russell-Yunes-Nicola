@@ -1,6 +1,9 @@
 ﻿@page "/chat"
+@rendermode InteractiveServer
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+@inject DeerDiary_Frontend.Auth.Token token
+@using System.Net.Http.Headers
 
 <header>
     <DeerDiary_Frontend.Components.Layout.NavMenu></DeerDiary_Frontend.Components.Layout.NavMenu>
@@ -31,15 +34,21 @@
 </body>
 
 @code {
-    private string currentQuestion = "Loading question...";
+    private string currentQuestion = "Loading...";
     private string answer = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        // Retrieve the question from the backend
-        var response = await Http.GetAsync("https://localhost:7050/journal/SpecificQuestion");
+        if (token._Token is null)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+        else Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token._Token);
 
-        if (response.IsSuccessStatusCode)
+        // Retrieve the question from the backend
+        var response = await Http.GetAsync("https://localhost:7050/journal/RandomQuestion");
+        
+        if (response is not null)
         {
             currentQuestion = await response.Content.ReadAsStringAsync();
         }
@@ -57,7 +66,7 @@
 
         if (response.IsSuccessStatusCode)
         {
-            
+
             answer = string.Empty; 
             await OnInitializedAsync();
         }

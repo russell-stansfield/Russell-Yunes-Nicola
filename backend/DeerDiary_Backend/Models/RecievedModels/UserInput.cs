@@ -6,11 +6,8 @@ using System.Text.Json.Serialization;
 
 namespace DeerDiary_Backend.Models
 {
-    [DataContract]
-    public class User
+    public class UserInput
     {
-        [Column("UserId")]
-        public int? Id { get; set; }
         [Column("UserName")]
         [Required(ErrorMessage = "User name missing")]
         public string UserName { get; set; }
@@ -19,8 +16,6 @@ namespace DeerDiary_Backend.Models
         public string UserPassword { get; set; }
         [EmailAddress (ErrorMessage = "Invalid E-Mail format")]
         [Column("UserMail")]
-        public string UserMail { get; set; }
-        [Column("PasswordSalt")]
-        public string PasswordSalt { get; set; }
+        public string? UserMail { get; set; }
     }
 }

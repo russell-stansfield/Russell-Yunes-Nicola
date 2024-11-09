@@ -134,7 +134,13 @@ namespace DeerDiary_Backend.Migrations
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
+                    b.Property<string>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("PasswordSalt");
+
                     b.Property<string>("UserMail")
+                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("UserMail");
 

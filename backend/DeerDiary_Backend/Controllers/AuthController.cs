@@ -32,17 +32,18 @@ namespace DeerDiary_Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] User user) {
+        public IActionResult Login([FromBody] UserInput user) {
 
             if (ModelState.IsValid)
             {
-                if (_Context.Users.Where(x =>
-                (x.UserName == user.UserName) &&
-                x.UserPassword == user.UserPassword).FirstOrDefault() != null)
+                var DBuser = _Context.Users.SingleOrDefault(x => x.UserName == user.UserName);
+
+                if (user is null) return Unauthorized();
+
+                if (PasswordHasher.VerifyPassword(user.UserPassword, DBuser.UserPassword, DBuser.PasswordSalt))
                 {
                     return Content(_Jwtmanager.GenerateJwtToken(user.UserName));
                 }
-                return Unauthorized();
             }
             return BadRequest();
         }
@@ -69,19 +70,30 @@ namespace DeerDiary_Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register([FromBody] User user)
+        public IActionResult Register([FromBody] UserInput user)
         {
             if (ModelState.IsValid)
             {
-                if (_Context.Users.Where(x =>
-                (x.UserName == user.UserName) &&
-                x.UserPassword == user.UserPassword).FirstOrDefault() == null)
+                if (_Context.Users.Where(x => x.UserName == user.UserName ).FirstOrDefault() != null) return Conflict("Username already exists");
+                else if (_Context.Users.Where(x => x.UserMail == user.UserMail).FirstOrDefault() != null) return Conflict("Account already exists");
+
+                string salt;
+                string hashedPassword = PasswordHasher.HashPassword(user.UserPassword, out salt);
+
+                User Instance = new User()
                 {
-                    _Context.Users.Add(user);
-                    _Context.SaveChanges();
-                    return Ok();
-                }
-                return Conflict();
+                    UserName = user.UserName,
+                    UserMail = user.UserMail
+                };
+
+                Instance.UserPassword = hashedPassword;
+                Instance.PasswordSalt = salt;
+
+                _Context.Users.Add(Instance);
+                _Context.SaveChanges();
+
+                return Ok();
+
             }
 
             return BadRequest(ModelState);

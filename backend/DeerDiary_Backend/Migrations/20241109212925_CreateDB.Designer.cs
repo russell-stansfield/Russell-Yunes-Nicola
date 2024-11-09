@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeerDiary_Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241109192301_CreateDB")]
+    [Migration("20241109212925_CreateDB")]
     partial class CreateDB
     {
         /// <inheritdoc />
@@ -137,7 +137,13 @@ namespace DeerDiary_Backend.Migrations
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
+                    b.Property<string>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("PasswordSalt");
+
                     b.Property<string>("UserMail")
+                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("UserMail");
 

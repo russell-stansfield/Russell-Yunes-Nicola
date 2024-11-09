@@ -52,7 +52,8 @@ namespace DeerDiary_Backend.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     UserName = table.Column<string>(type: "longtext", nullable: false),
                     UserPassword = table.Column<string>(type: "longtext", nullable: false),
-                    UserMail = table.Column<string>(type: "longtext", nullable: true)
+                    UserMail = table.Column<string>(type: "longtext", nullable: false),
+                    PasswordSalt = table.Column<string>(type: "longtext", nullable: false)
                 },
                 constraints: table =>
                 {

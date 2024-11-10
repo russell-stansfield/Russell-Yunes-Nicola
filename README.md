@@ -12,3 +12,14 @@ We will employ Blazor as our frontend, where it is independent from the backend 
 We will employ ASP.NET as our backend, where it connects to the DB and offers an API. Entity framework will be used as an ORM.
 #### Database
 We will employ a MySQL database which will be running inside a container.
+
+## Starting the project
+### Docker setup
+- Make sure no MySQL processes are running so that our Database system works.
+- `docker compose up` inside of the repository to start up all the containers needed for the Website.
+
+### Opening the Website
+- Open the solution in VisualStudio and right-click thes solution file, then select "Configure Startup Projects...", choose "Multiple startup projects:" and finally select "Start" for both Frontend and Backend.
+- Open the PMC (Packet Manager Console) by clicking on View > Other Windows > Packet Manager Console
+- Inside the PMC type `update-update` and wait for it to say "Done."
+- Now you can press Start or F5 to startup the website and make sure to navigate to `localhost:7201`.

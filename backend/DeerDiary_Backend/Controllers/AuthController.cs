@@ -38,7 +38,7 @@ namespace DeerDiary_Backend.Controllers
             {
                 var DBuser = _Context.Users.SingleOrDefault(x => x.UserName == user.UserName);
 
-                if (user is null) return Unauthorized();
+                if (DBuser is null) return Unauthorized();
 
                 if (PasswordHasher.VerifyPassword(user.UserPassword, DBuser.UserPassword, DBuser.PasswordSalt))
                 {

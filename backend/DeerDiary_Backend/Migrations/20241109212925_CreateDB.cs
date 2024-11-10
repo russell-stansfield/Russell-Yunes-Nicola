@@ -126,6 +126,11 @@ namespace DeerDiary_Backend.Migrations
                 name: "IX_Replies_fk_JournalEntryId",
                 table: "Replies",
                 column: "fk_JournalEntryId");
+
+            migrationBuilder.InsertData(
+        table: "RandomQuestions",
+        columns: new[] { "RandomQuestionId", "RandomQuestionText" },
+        values: new object[,] { { 1, "What is your favorite memory from childhood?" }, { 2, "If you could travel anywhere, where would you go?" }, { 3, "What is one skill you would like to learn and why?" }, { 4, "Describe a time you faced a challenge and overcame it." }, { 5, "What is your biggest goal for the next year?" }, { 6, "How are you feeling today?" }, {7, "What do you appreciate in your life?" }, { 8, "Is there a thing that makes you smile?" } });
         }
 
         /// <inheritdoc />
